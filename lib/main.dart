@@ -1,12 +1,12 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-void main() => runApp(LoadMoreWidget());
+void main() => runApp(const LoadMoreWidget());
 
 class LoadMoreWidget extends StatefulWidget {
+  const LoadMoreWidget({super.key});
+
   @override
   State<StatefulWidget> createState() => ScheduleExample();
 }
@@ -14,9 +14,9 @@ class LoadMoreWidget extends StatefulWidget {
 Map<DateTime, List<_Meeting>> _dataCollection = <DateTime, List<_Meeting>>{};
 
 class ScheduleExample extends State<LoadMoreWidget> {
-  List<String> _subjectCollection = <String>[];
-  List<Color> _colorCollection = <Color>[];
-  MeetingDataSource _events = MeetingDataSource(<_Meeting>[]);
+  final List<String> _subjectCollection = <String>[];
+  final List<Color> _colorCollection = <Color>[];
+  final MeetingDataSource _events = MeetingDataSource(<_Meeting>[]);
 
   @override
   void initState() {
@@ -36,7 +36,7 @@ class ScheduleExample extends State<LoadMoreWidget> {
                     child: SafeArea(
                         child: SfCalendar(
                           view: CalendarView.month,
-                          allowedViews: [
+                          allowedViews: const [
                             CalendarView.day,
                             CalendarView.week,
                             CalendarView.workWeek,
@@ -63,7 +63,7 @@ class ScheduleExample extends State<LoadMoreWidget> {
       future: loadMoreAppointments(),
       builder: (context, snapShot) {
         return Container(
-            alignment: Alignment.center, child: CircularProgressIndicator());
+            alignment: Alignment.center, child: const CircularProgressIndicator());
       },
     );
   }
@@ -92,7 +92,7 @@ class ScheduleExample extends State<LoadMoreWidget> {
     _colorCollection.add(const Color(0xFF0A8043));
 
     _dataCollection = <DateTime, List<_Meeting>>{};
-    final DateTime today = DateTime(2020, 05, 11);
+    final DateTime today = DateTime.now();
     final DateTime rangeStartDate = DateTime(today.year, today.month, today.day)
         .add(const Duration(days: -500));
     final DateTime rangeEndDate = DateTime(today.year, today.month, today.day)
@@ -103,7 +103,7 @@ class ScheduleExample extends State<LoadMoreWidget> {
     Random random = Random();
     for (DateTime i = rangeStartDate;
     i.isBefore(rangeEndDate);
-    i = i.add(Duration(days: 1))) {
+    i = i.add(const Duration(days: 1))) {
       date = i;
       for (int j = 0; j < 2; j++) {
         startDate =
@@ -111,7 +111,7 @@ class ScheduleExample extends State<LoadMoreWidget> {
         meeting = _Meeting(
             _subjectCollection[random.nextInt(10)],
             startDate,
-            startDate.add(Duration(hours: 1)),
+            startDate.add(const Duration(hours: 1)),
             _colorCollection[random.nextInt(10)],
             false);
 
